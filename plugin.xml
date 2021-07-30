@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-unlocks" version="0.0.1">
+    <name>UnlocksPlugin</name>
+
+    <description>An Android Cordova plugin that counts the device unlocks</description>
+    <license>MIT</license>
+
+    <keywords>cordova,android,unlocks,usage,events</keywords>
+    <repo>https://github.com/dwinc/cordova-plugin-unlocks.git</repo>
+    <issue>https://github.com/dwinc/cordova-plugin-unlocks/issues</issue>
+  
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+  
+    <js-module src="www/unlocksplugin.js" name="unlocksPlugin">
+        <clobbers target="window.plugins.unlockslugin" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="UnlocksPlugin">
+                <param name="android-package" value="com.dwinc.cordova.plugin.UnlocksPlugin"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/UnlocksPlugin.java" target-dir="src/com/dwinc/cordova/plugin" />
+    </platform>
+</plugin>
