@@ -19,9 +19,6 @@ import android.content.Context;
 
 public class UnlocksPlugin extends CordovaPlugin {
 
-    private static final String DURATION_LONG = "long";
-    public Context mContext;
-
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
         
