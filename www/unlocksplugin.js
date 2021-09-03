@@ -1,19 +1,22 @@
-// Empty constructor
-function UnlocksPlugin() {}
+var exec = require('cordova/exec');
 
-UnlocksPlugin.prototype.unlocks = function(start, end, successCallback, errorCallback) {
-  var options = {};
-  options.start = start;
-  options.end = end;
-  cordova.exec(successCallback, errorCallback, 'UnlocksPlugin', 'unlocks', [options]);
+function execPromise(action, args) {
+	return new Promise((resolve, reject) => {
+		exec(resolve, reject, 'UnlocksPlugin', action, args);
+	});
 }
 
-// Installation constructor that binds UnlocksPlugin to window
-UnlocksPlugin.install = function() {
-  if (!window.plugins) {
-    window.plugins = {};
-  }
-  window.plugins.unlocksPlugin = new UnlocksPlugin();
-  return window.plugins.unlocksPlugin;
+module.exports = {
+	unlockEvents: function(begin, end) {
+		return execPromise('unlockEvents', [begin, end]);
+	},
+	unlockStats: function(begin, end) {
+		return execPromise('unlockStats', [begin, end]);
+	},
+	hasPermission: function() {
+		return execPromise('hasPermission', []);
+	},
+	requestPermission: function() {
+		return execPromise('requestPermission', []);
+	},
 };
-cordova.addConstructor(UnlocksPlugin.install);
