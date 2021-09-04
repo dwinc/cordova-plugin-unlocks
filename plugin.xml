@@ -10,21 +10,28 @@
     <keywords>cordova,android,unlocks,usage,events</keywords>
     <repo>https://github.com/dwinc/cordova-plugin-unlocks.git</repo>
     <issue>https://github.com/dwinc/cordova-plugin-unlocks/issues</issue>
-  
+
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
     </engines>
-  
-    <js-module src="www/unlocksplugin.js" name="unlocksPlugin">
-        <clobbers target="window.plugins.unlockslugin" />
+
+    <js-module src="www/unlocksplugin.js" name="UnlocksPlugin">
+        <merges target="cordova.plugins.unlocksPlugin"/>
     </js-module>
+
     <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
+        </config-file>
+
         <config-file target="res/xml/config.xml" parent="/*">
+            <preference name="android-minSdkVersion" value="28" />
             <feature name="UnlocksPlugin">
                 <param name="android-package" value="com.dwinc.cordova.plugin.UnlocksPlugin"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/UnlocksPlugin.java" target-dir="src/com/dwinc/cordova/plugin" />
+        <source-file src="src/android/com/dwinc/cordova/plugin/UnlocksPlugin.java"
+                     target-dir="src/com/dwinc/cordova/plugin"/>
     </platform>
 </plugin>
